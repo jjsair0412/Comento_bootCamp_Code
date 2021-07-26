@@ -46,6 +46,7 @@ public class ThemeServiceImplTest {
 
         //when
         Theme theme = this.themeService.getOrSaveTheme("자연체험");
+
         //then
         then(theme.getName()).isEqualTo("자연체험");
     }

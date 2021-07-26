@@ -18,6 +18,7 @@ public class ProgramViewService {
 
     private final ProgramRepository programRepository;
 
+    // return값이 null일수 있을 때 Optional로 감싸서 받아온다.
     public Optional<ProgramViewDetailDto> getBy(Long id) {
         return programRepository.findById(id).map(program ->
                 new ProgramViewDetailDto(
@@ -25,7 +26,8 @@ public class ProgramViewService {
                         program.getName(),
                         program.getIntroduction(),
                         program.getIntroductionDetail(),
-                        program.getRegion()
+                        program.getRegion(),
+                        program.getTheme().getName()
                 )
         );
     }
