@@ -28,8 +28,7 @@ public class ProgramController {
 
     @GetMapping
     public ResponseEntity<Page<ProgramViewDto>> pageBy(
-            @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
-                    Pageable pageable) {
+            @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(this.programViewService.pageBy(pageable));
     }
 
@@ -38,6 +37,13 @@ public class ProgramController {
         Optional<ProgramViewDetailDto> programViewDto = this.programViewService.getBy(id);
         return programViewDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<ProgramViewDetailDto> getByName(@PathVariable String name) {
+        Optional<ProgramViewDetailDto> programViewDto = this.programViewService.getByName(name);
+        return programViewDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 
     @PostMapping
     // @Valid 어노테이션을 사용하는 이유는 사용자가 넘겨주는 값은 검증을 거쳐야한다.

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import org.springframework.data.support.PageableExecutionUtils;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import static com.github.homework.program.domain.QProgram.program;
 import static com.github.homework.theme.domain.QTheme.theme;
@@ -23,6 +24,20 @@ public class ProgramCustomRepositoryImpl extends QuerydslRepositorySupport imple
 
     @Override
     public Page<ProgramViewDto> findBy(Pageable pageable) {
+        JPQLQuery<ProgramViewDto> query = Objects.requireNonNull(getQuerydsl())
+                .applyPagination(pageable, from(program)
+                        .innerJoin(program.theme, theme)
+                ).select(Projections.constructor(ProgramViewDto.class,
+                        program.id,
+                        program.name,
+                        program.theme.name
+                ));
+
+        return PageableExecutionUtils.getPage(query.fetch(), pageable, query::fetchCount);
+    }
+
+    @Override
+    public Page<ProgramViewDto> findByName(Pageable pageable) {
         JPQLQuery<ProgramViewDto> query = Objects.requireNonNull(getQuerydsl())
                 .applyPagination(pageable, from(program)
                         .innerJoin(program.theme, theme)
