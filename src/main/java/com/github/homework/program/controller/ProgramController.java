@@ -39,6 +39,7 @@ public class ProgramController {
     }
 
     @GetMapping("/{name}")
+    // name을 value로 받는다.
     public ResponseEntity<ProgramViewDetailDto> getByName(@PathVariable String name) {
         Optional<ProgramViewDetailDto> programViewDto = this.programViewService.getByName(name);
         return programViewDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

@@ -8,5 +8,4 @@ public interface ProgramCustomRepository {
 
     Page<ProgramViewDto> findBy(Pageable pageable);
 
-    Page<ProgramViewDto> findByName(Pageable pageable);
 }

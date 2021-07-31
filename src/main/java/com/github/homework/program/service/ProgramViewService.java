@@ -1,9 +1,11 @@
 package com.github.homework.program.service;
 
+import com.github.homework.program.domain.Program;
 import com.github.homework.program.model.ProgramViewDetailDto;
 import com.github.homework.program.model.ProgramViewDto;
 import com.github.homework.program.repository.ProgramRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,8 +34,9 @@ public class ProgramViewService {
         );
     }
 
+
     public Optional<ProgramViewDetailDto> getByName(String name) {
-        return programRepository.findByName(name).map(program ->
+        return programRepository.findById(Long.parseLong(name)).map(program ->
                 new ProgramViewDetailDto(
                         program.getId(),
                         program.getName(),
