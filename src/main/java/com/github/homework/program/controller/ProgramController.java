@@ -48,7 +48,7 @@ public class ProgramController {
 
     @GetMapping("/{findTopTen}")
     public ResponseEntity<ProgramViewDetailDto> getFindTop(){
-        return
+        return ResponseEntity.ok(this.programViewService.getFindTop(pageable));
     }
 
 
