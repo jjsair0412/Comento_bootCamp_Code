@@ -46,6 +46,11 @@ public class ProgramController {
         return programViewDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/{findTopTen}")
+    public ResponseEntity<ProgramViewDetailDto> getFindTop(){
+        return
+    }
+
 
     @PostMapping
     // @Valid 어노테이션을 사용하는 이유는 사용자가 넘겨주는 값은 검증을 거쳐야한다.
